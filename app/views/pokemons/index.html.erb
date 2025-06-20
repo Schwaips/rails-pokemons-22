@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Pokedex</h1>
+  <%= link_to "Trainers", "#" %>
+  <%= link_to "Random Pokemon", "#" %>
+
+  <%= form_with(url: pokemons_path, method: :get, class: "" ) do |f| %>
+    <%= f.text_field :query, value: params[:query] %>
+
+    <%= f.submit "Search", class: "btn btn-primary" %>
+  <% end %>
+
+
+  <% if @pokemons.empty? %>
+    <p>désolé, aucun pokemon trouvé</p>
+  <% end %>
+
+  <div class="d-flex flex-wrap justify-content-between gap-3">
+    <% @pokemons.each do |poke| %>
+      <%= link_to pokemon_path(poke) do %>
+        <div class="card" style="width: 18rem;">
+          <%= cl_image_tag poke.photo.key %>
+          <div class="card-body">
+            <p class="card-text"><%= poke.name %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

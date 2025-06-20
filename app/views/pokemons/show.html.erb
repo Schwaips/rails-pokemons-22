@@ -1,0 +1,26 @@
+
+<div class="container">
+  <%= link_to "Retour au pokedex", root_path %>
+
+  <div class="row py-4">
+    <div class="col-md-4">
+      <p>You hear a rustle in the tall grass....A WILD pokemon appears!</p>
+      <%= cl_image_tag @pokemon.photo.key, class:"img-fluid w-100 border border-warning rounded" %>
+
+      <div class="d-flex flex-column align-items-center gap-2 py-3 bg-primary-subtle">
+        <p><%= @pokemon.name %></p>
+        <p><%= @pokemon.element_type %></p>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h2>Do you dare to catch this Pokemon ? </h2>
+      <%= simple_form_for [@pokemon, @pokeball] do |f| %>
+        <%= f.association :trainer, label: "Trainer" %>
+        <%= f.input :location, label: "Where ?" %>
+        <%= f.input :caught_on, label: "When ?", as: :date, html5: true %>
+        <%= f.submit "Catch !", class:"btn btn-secondary btn-sm" %>
+      <% end %>
+    </div>
+  </div>
+</div>
